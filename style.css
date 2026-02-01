@@ -1,0 +1,426 @@
+
+      /* --- GENERAL STYLES --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Fredoka", sans-serif;
+        background: linear-gradient(
+          180deg,
+          #fff0f5 0%,
+          #ffe4e1 100%
+        ); /* Soft Pink Background */
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        color: #5d4037;
+      }
+
+      /* Container to mimic the phone screen in video */
+      .container {
+        width: 100%;
+        max-width: 400px;
+        height: 100%;
+        position: relative;
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Hiding sections initially */
+      .step {
+        display: none;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        animation: fadeIn 0.8s ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 20px;
+      }
+
+      .active {
+        display: flex;
+      }
+
+      /* --- BUTTONS --- */
+      .btn {
+        background: #ffb7b2;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        border: none;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(255, 183, 178, 0.4);
+        transition:
+          transform 0.2s,
+          background 0.2s;
+        margin-top: 20px;
+        font-family: "Nunito", sans-serif;
+      }
+      .btn:active {
+        transform: scale(0.95);
+      }
+      .btn:hover {
+        background: #ff9e99;
+      }
+
+      /* Specific Button Styles from Video */
+      .btn-white {
+        background: white;
+        color: #ffb7b2;
+        border: 2px solid #ffb7b2;
+      }
+
+      /* --- LOADING SCREEN (Step 0) --- */
+      #loading-screen .loader-box {
+        width: 80%;
+        text-align: center;
+      }
+      .progress-bar-container {
+        width: 100%;
+        height: 10px;
+        background: #ffe4e1;
+        border-radius: 20px;
+        margin-top: 15px;
+        overflow: hidden;
+        border: 1px solid #ffb7b2;
+      }
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: #ff9aa2;
+        border-radius: 20px;
+        transition: width 0.1s linear;
+      }
+      .loading-text {
+        font-size: 1.2rem;
+        color: #888;
+        margin-bottom: 10px;
+      }
+      .loading-icon {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        animation: bounce 2s infinite;
+      }
+
+      /* --- WELCOME SCREEN (Step 1) --- */
+      .card {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        padding: 30px;
+        border-radius: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .panda-img {
+        width: 150px;
+        height: auto;
+        margin-bottom: 20px;
+      }
+      .main-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #6d4c41;
+      }
+      .sub-text {
+        font-size: 0.9rem;
+        color: #8d6e63;
+        margin-bottom: 20px;
+      }
+
+      /* --- CAKE SECTION (Step 2) --- */
+      .cake-container {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .cake-img {
+        width: 100%;
+        transition: 0.5s;
+      }
+      .candle {
+        position: absolute;
+        top: -20px; /* Adjust based on your cake image */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 15px;
+        height: 40px;
+        background: repeating-linear-gradient(
+          45deg,
+          #ff9aa2,
+          #ff9aa2 5px,
+          white 5px,
+          white 10px
+        );
+        display: none; /* Hidden initially */
+        border-radius: 4px;
+      }
+      .flame {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 12px;
+        height: 18px;
+        background: orange;
+        border-radius: 50% 50% 20% 20%;
+        box-shadow:
+          0 0 10px orange,
+          0 0 20px yellow;
+        animation: flicker 1s infinite alternate;
+        display: none;
+      }
+      /* Decorations Overlay */
+      .decorations {
+        position: absolute;
+        top: -50px;
+        width: 100%;
+        display: none; /* Hidden initially */
+      }
+      .bunting {
+        width: 100%;
+      }
+
+      /* --- BALLOONS (Step 3) --- */
+      .balloon-container {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        height: 300px;
+        align-items: center;
+        position: relative;
+      }
+      .balloon-wrapper {
+        position: relative;
+        width: 70px;
+        height: 200px; /* Space for balloon + string */
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      .balloon-wrapper:hover {
+        transform: translateY(-10px);
+      }
+
+      .balloon {
+        width: 60px;
+        height: 75px;
+        background-color: #ff9aa2;
+        border-radius: 50%;
+        position: relative;
+        z-index: 2;
+      }
+      .string {
+        width: 2px;
+        height: 100px;
+        background: #888;
+        position: absolute;
+        top: 74px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+      }
+      /* Hidden Message behind balloon */
+      .hidden-text {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: bold;
+        color: #5d4037;
+        font-size: 1.1rem;
+        opacity: 0;
+        transition: opacity 0.5s;
+        z-index: 0;
+      }
+      /* Balloon Colors */
+      .b1 {
+        background: #ffb7b2;
+      }
+      .b2 {
+        background: #ffdac1;
+      }
+      .b3 {
+        background: #e2f0cb;
+      }
+      .b4 {
+        background: #b5ead7;
+      }
+
+      /* --- GALLERY (Step 4) --- */
+      .gallery-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        width: 100%;
+        max-width: 350px;
+        padding-bottom: 20px;
+        -webkit-overflow-scrolling: touch;
+      }
+      /* Hide scrollbar */
+      .gallery-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .photo-card {
+        flex: 0 0 100%;
+        scroll-snap-align: center;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+      }
+      .photo-frame {
+        background: white;
+        padding: 10px 10px 40px 10px; /* Polaroid style */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transform: rotate(-2deg);
+      }
+      .photo-frame img {
+        width: 250px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+      .swipe-hint {
+        font-size: 0.8rem;
+        color: #aaa;
+        margin-bottom: 10px;
+      }
+
+      /* --- MESSAGE CARD (Step 5) --- */
+      .envelope-area {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .message-card {
+        background: #fff;
+        width: 320px;
+        height: 450px; /* Fixed height for scroll */
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        text-align: left;
+        position: relative;
+        background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png"); /* Texture */
+        display: none; /* Hidden until clicked */
+      }
+      .message-card::-webkit-scrollbar {
+        display: none;
+      } /* Hide Scrollbar */
+
+      .closed-envelope {
+        width: 300px;
+        height: 200px;
+        background: #ffb7b2;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+      }
+      .closed-envelope::after {
+        content: "Tap to open";
+        color: white;
+        font-weight: bold;
+      }
+      .msg-title {
+        font-size: 1.5rem;
+        color: #ff9aa2;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      .msg-body {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #666;
+        font-family: "Nunito", sans-serif;
+      }
+
+      /* --- FINAL GIFT (Step 6) --- */
+      .gift-box {
+        width: 150px;
+        cursor: pointer;
+        animation: float 3s ease-in-out infinite;
+      }
+      .final-reveal {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* --- ANIMATIONS --- */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+      @keyframes flicker {
+        0% {
+          opacity: 0.8;
+          transform: translateX(-50%) scale(1);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(-50%) scale(1.1);
+        }
+      }
+      @keyframes pop {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(0);
+          opacity: 0;
+        }
+      }

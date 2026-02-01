@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Happy Birthday Cutiepie!</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=Nunito:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="loading-screen" class="step active">
+        <div class="loading-icon">🎂</div>
+        <div class="loader-box">
+          <div class="loading-text">Loading your birthday surprise...</div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="progress"></div>
+          </div>
+          <div
+            id="percentage"
+            style="margin-top: 5px; color: #ff9aa2; font-weight: bold"
+          >
+            0%
+          </div>
+        </div>
+      </div>
+
+      <div id="welcome-screen" class="step">
+        <div class="card">
+          <img src="./images/7.jpeg" alt="Cute Panda" class="panda-img" />
+          <div class="main-title">A Cutiepie was born today, 17 years ago!</div>
+          <div class="sub-text">Yes, it's YOU! A little surprise awaits...</div>
+          <button
+            class="btn"
+            onclick="nextStep('welcome-screen', 'cake-screen')"
+          >
+            Start the surprise 🎁
+          </button>
+        </div>
+      </div>
+
+      <div id="cake-screen" class="step">
+        <div class="decorations" id="bunting-overlay">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/7342/7342890.png"
+            class="bunting"
+            alt="Decorations"
+          />
+        </div>
+
+        <div class="cake-container">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2682/2682340.png"
+            id="cake-img"
+            class="cake-img"
+            alt="Cake"
+          />
+          <div class="candle" id="candle">
+            <div class="flame" id="flame"></div>
+          </div>
+        </div>
+
+        <h2
+          id="birthday-msg"
+          style="
+            opacity: 0;
+            transition: 1s;
+            color: #ff9aa2;
+            margin-bottom: 20px;
+          "
+        >
+          Happy Birthday, Cutiepie!
+        </h2>
+
+        <div id="cake-buttons">
+          <button
+            class="btn btn-white"
+            id="btn-decorate"
+            onclick="decorateCake()"
+          >
+            ✨ Decorate
+          </button>
+        </div>
+      </div>
+
+      <div id="balloon-screen" class="step">
+        <h2 style="color: #ff9aa2; margin-bottom: 30px">
+          Pop all 4 balloons! 🎈
+        </h2>
+        <div class="balloon-container">
+          <div class="balloon-wrapper" onclick="popBalloon(this, 1)">
+            <div class="hidden-text">You</div>
+            <div class="balloon b1"></div>
+            <div class="string"></div>
+          </div>
+
+          <div class="balloon-wrapper" onclick="popBalloon(this, 2)">
+            <div class="hidden-text">are</div>
+            <div class="balloon b2"></div>
+            <div class="string"></div>
+          </div>
+
+          <div class="balloon-wrapper" onclick="popBalloon(this, 3)">
+            <div class="hidden-text">a</div>
+            <div class="balloon b3"></div>
+            <div class="string"></div>
+          </div>
+
+          <div class="balloon-wrapper" onclick="popBalloon(this, 4)">
+            <div class="hidden-text">Cutiee</div>
+            <div class="balloon b4"></div>
+            <div class="string"></div>
+          </div>
+        </div>
+        <button
+          class="btn"
+          id="balloon-next"
+          style="display: none; margin-top: 50px"
+          onclick="nextStep('balloon-screen', 'gallery-screen')"
+        >
+          Next ➡️
+        </button>
+      </div>
+
+      <div id="gallery-screen" class="step">
+        <h2 style="color: #ff9aa2; margin-bottom: 10px">This Girl is really beautifull</h2>
+        <div class="swipe-hint">(Swipe for more &larr;&rarr;)</div>
+
+        <div class="gallery-container">
+          <div class="photo-card">
+            <div class="photo-frame">
+              <img src="./images/4.jpeg" alt="Memory 1" />
+            </div>
+          </div>
+          <div class="photo-card">
+            <div class="photo-frame" style="transform: rotate(2deg)">
+              <img src="./images/5.jpeg" alt="Memory 2" />
+            </div>
+          </div>
+          <div class="photo-card">
+            <div class="photo-frame" style="transform: rotate(-1deg)">
+              <img src="./images/9.jpeg" alt="Memory 3" />
+            </div>
+          </div>
+          <div class="photo-card">
+            <div class="photo-frame" style="transform: rotate(2deg)">
+              <img src="./images/10.jpeg" alt="Memory 4" />
+            </div>
+          </div>
+          <div class="photo-card">
+            <div class="photo-frame" style="transform: rotate(2deg)">
+              <img src="./images/11.jpeg" alt="Memory 5" />
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="btn"
+          onclick="nextStep('gallery-screen', 'message-screen')"
+        >
+          Open My Message 💌
+        </button>
+      </div>
+
+      <div id="message-screen" class="step">
+        <div class="envelope-area">
+          <h2 style="color: #ff9aa2; margin-bottom: 20px">A Special Message</h2>
+
+          <div class="closed-envelope" id="envelope" onclick="openMessage()">
+            <span style="font-size: 3rem">📩</span>
+          </div>
+
+          <div class="message-card" id="message-card">
+            <h3 class="msg-title">Happy Birthday to You! 🎂</h3>
+            <p class="msg-body">
+              "Happy Birthday ❤️✨ I hope your day is as beautiful and special as you are. I just want you to know that you genuinely mean a lot more than you might realize. Your smile, your vibe, and the way you carry yourself always make everything feel better. I feel lucky to know you, and I truly wish that this new year of your life brings you endless happiness, success, and love. May all your dreams come true, and may you always stay the same wonderful person. Enjoy your day to the fullest — you deserve it. 🎂💛" <br><br>
+              "Happy Birthday Huda... You deserve all the happiness, love and smiles in the world today and always you have this special way of making everything around you brighter, your smile your kindness, and the way you make people feel truly cared, you have very kind soul , and you truly one of a kind , and I just want to know how special you are . keep being the amazing person you are , spreading joy whereever you go . wishing you endless happiness, sucess , and all the sweet things life has to offer🩷"
+            </p>
+          </div>
+
+          <button
+            class="btn"
+            id="msg-next"
+            style="display: none"
+            onclick="nextStep('message-screen', 'gift-screen')"
+          >
+            Next ➡️
+          </button>
+        </div>
+      </div>
+
+      <div id="gift-screen" class="step">
+        <h2 style="color: #ff9aa2; margin-bottom: 30px">One Last Thing...</h2>
+
+        <img
+          src="./images/giftbox.png"
+          class="gift-box"
+          id="gift-box"
+          onclick="openGift()"
+          alt="Gift Box"
+        />
+        <p style="margin-top: 10px; color: #888">Tap the gift</p>
+
+        <div class="final-reveal" id="final-reveal">
+          <img
+            src="https://media.tenor.com/GfSX-u7V94cAAAAj/mochi-cat.gif"
+            style="width: 150px; margin-bottom: 20px"
+            alt="Surprise"
+          />
+          <h2 style="color: #ff9aa2">Lots of love for you ❤️</h2>
+          <p style="color: #888; margin-top: 10px">
+            Once again, Happy Birthday! Hope you loved your surprise.
+          </p>
+
+          <button class="btn" onclick="location.reload()">Replay 🔄</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
